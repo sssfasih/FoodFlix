@@ -53,7 +53,7 @@
            aria-expanded="false">
             Dish Type
         </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <ul class="dropdown-menu" tabindex="-1" aria-disabled="true" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="#">Action</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li>
@@ -63,10 +63,10 @@
         </ul>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Breakfast</a>
+        <a class="nav-link" href="{% url 'breakfast' %}">Breakfast</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Lunch/Dinner</a>
+        <a class="nav-link" href="{% url 'lunch' %}" >Lunch/Dinner</a>
     </li>
 </ul>
 </nav>

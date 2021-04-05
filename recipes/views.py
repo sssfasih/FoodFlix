@@ -20,3 +20,7 @@ def signup(request):
 
 def drinks(request):
     return render(request,'recipes/drinks.html')
+def breakfast(request):
+    return render(request,'recipes/breakfast.html')
+def lunch(request):
+    return render(request,'recipes/lunch.html')

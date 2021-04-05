@@ -11,3 +11,7 @@ class Recipe(models.Model):
     Directions = models.CharField(max_length=9999,blank=False)
     Posted_by = models.ForeignKey(User,on_delete=models.CASCADE,related_name='poster',default='')
     Created = models.DateTimeField(auto_now=True)
+
+class Category(models.Model):
+    Name = models.CharField(max_length=25, blank=False)
+    Recipes = models.ManyToManyField(Recipe, related_name='category')
