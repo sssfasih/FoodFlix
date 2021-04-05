@@ -25,3 +25,32 @@ div.accounts {
     text-decoration: none ;
     color: #FFFFFF;
 }
+.active > a:hover, .accounts > a:hover {
+    color: #141301;
+}
+/* Forms */
+input:focus,
+textarea:focus,
+select:focus{
+
+    color: red !important;
+
+}
+
+
+form > img.login{
+    height: 100px !important;
+}
+form > img.signup{
+    height: 100px !important;
+}
+
+.card-title{
+    color: #FF711F;
+}
+
+img[alt='refreshing drinks']{
+    height: 20rem;
+    width: 100%;
+
+}

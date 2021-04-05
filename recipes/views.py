@@ -6,4 +6,17 @@ from django.http import HttpResponse,HttpResponseRedirect
 
 
 def index(request):
-    return HttpResponse("Food Flix Alive")
+    return render(request,'recipes/index.html')
+
+def login(request):
+    if request.method == "GET":
+        return render(request,'recipes/login.html')
+    else:return render(request,'recipes/login.html')
+
+def signup(request):
+    if request.method == "GET":
+        return render(request,'recipes/signup.html')
+    else:return render(request,'recipes/signup.html')
+
+def drinks(request):
+    return render(request,'recipes/drinks.html')
