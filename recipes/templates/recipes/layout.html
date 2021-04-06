@@ -29,11 +29,18 @@
               <button class="btn btn-outline-success" type="submit">Search</button>
 
                 </form> -->
+                {% if user.is_authenticated %}
+                    <div class="d-flex accounts">
+                    <a href="#" class="nav-link">{{ user.username }}</a>
+                    <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+                    </div>
 
+                {% else %}
                 <div class="d-flex accounts">
                     <a href="{% url 'login' %}" class="nav-link">Login</a>
                     <a href="{% url 'signup' %}" class="nav-link">Sign up</a>
                 </div>
+                {% endif %}
 
             </div>
         </div>
@@ -46,7 +53,7 @@
         <a class="nav-link" href="{% url 'index' %}">Home</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{% url 'drinks' %}">Drinks</a>
+        <a class="nav-link" href="{% url 'category' 'drinks' %}">Drinks</a>
     </li>
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -63,10 +70,10 @@
         </ul>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{% url 'breakfast' %}">Breakfast</a>
+        <a class="nav-link" href="{% url 'category' 'breakfast' %}">Breakfast</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{% url 'lunch' %}" >Lunch/Dinner</a>
+        <a class="nav-link" href="{% url 'category' 'lunch' %}" >Lunch/Dinner</a>
     </li>
 </ul>
 </nav>
