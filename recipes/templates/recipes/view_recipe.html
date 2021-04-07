@@ -1,34 +1,34 @@
 {% extends 'recipes/layout.html' %}
 {% load static %}
-{% block styles %}
-
-{% endblock %}
 {% block main %}
 
-    <!-- Slider -->
+
+<div class="container">
+    <h1 class="center">{{ recipe.Name }}</h1>
+ <!-- Slider -->
    <section id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
-  <div class="carousel-inner">
+  <div class="carousel-inner" id="recipe_carousel">
         <div class="carousel-item active">
-      <img src="https://www.foodfusion.com/wp-content/uploads/2018/02/ff-home-banner.jpg" class="d-block w-100" alt="...">
+      <img src="https://freepikpsd.com/wp-content/uploads/2019/10/lassi-glass-png-1-Transparent-Images.png" class="d-block" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5>Have to cook?</h5>
         <p>Don't worry FoodFlix has your back. Learn delicious recipes and rule the kitchen .</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="https://www.foodfusion.com/wp-content/uploads/2018/02/ff-home-banner.jpg" class="d-block w-100" alt="...">
+      <img src="https://thumbs.dreamstime.com/b/yogurt-ayran-lassi-fresh-plain-homemade-yougurt-yogurt-youghurt-kefir-ayran-lassi-glass-herbs-over-gray-background-copy-116473662.jpg" class="d-block" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5>FoodFlix Cooking Classes</h5>
         <p>Now get cooking lessons from expert only on FoodFlix. Click here to book your seat. </p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="https://www.foodfusion.com/wp-content/uploads/2018/02/ff-home-banner.jpg" class="d-block w-100" alt="...">
+      <img src="https://c8.alamy.com/comp/X7DY1J/lassi-drink-in-glasses-X7DY1J.jpg" class="d-block" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <h5>Ramadan Kareem!</h5>
         <p>This Ramadan serve the blessings on your Sehr and Iftaar table.</p>
@@ -45,28 +45,8 @@
   </button>
 </section>
     <!-- Slider end -->
-
-    <container id="recipes">
-    <div class="container">
-    <h1 class="text-center my-2">FoodFlix Recipes</h1>
-    <div class="row">
-        {% for eachRecipe in recipes %}
-        <div class="col-sm-12 col-md-6 col-lg-3 my-xs-4 my-lg-1">
-        <div class="card">
-  <img src="https://www.foodfusion.com/wp-content/uploads/2019/10/Texas-Sheet-cake-Recipe-by-Food-fusion-2.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h2 class="card-text text-center">{{ eachRecipe.Name}}</h2>
-  </div>
-</div></div>
-            {% if forloop.counter|divisibleby:4  %}
-        </div><div class="row">
-
-            {% endif %}
-
-        {% endfor %}
-    </div>
+    <p>Categories: {% for cat in recipe.category.all %}{{ cat.Name }},{% endfor %}</p>
+</div>
 
 
-    </div>
-    </container>
 {% endblock %}

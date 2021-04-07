@@ -54,3 +54,7 @@ img[alt='refreshing drinks']{
     width: 100%;
 
 }
+
+#recipe_carousel > div.active img {
+height: 300px;
+}

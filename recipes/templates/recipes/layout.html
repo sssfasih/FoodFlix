@@ -49,11 +49,14 @@
 </header>
 <nav>
 <ul class="nav nav-pills nav-fill">
-    <li class="nav-item active">
+    {% with url_name=request.resolver_match.url_name %}
+    <li class="nav-item {% if url_name == 'index' %}active{% endif %}">
         <a class="nav-link" href="{% url 'index' %}">Home</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'category' 'drinks' %}">Drinks</a>
+
+        {% url 'category' 'drinks' as drinks_url %}
+    <li class="nav-item {% if request.path == drinks_url %}active{% endif %}">
+        <a class="nav-link" href="{{ drinks_url }}">Drinks</a>
     </li>
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -69,12 +72,15 @@
             <li><a class="dropdown-item" href="#">Something else here</a></li>
         </ul>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'category' 'breakfast' %}">Breakfast</a>
+        {% url 'category' 'breakfast' as breakfast_url %}
+    <li class="nav-item {% if request.path == breakfast_url %}active{% endif %}">
+        <a class="nav-link" href="{{ breakfast_url }}">Breakfast</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'category' 'lunch' %}" >Lunch/Dinner</a>
+        {% url 'category' 'lunch' as lunch_url %}
+    <li class="nav-item {% if request.path == lunch_url %}active{% endif %}">
+        <a class="nav-link" href="{{ lunch_url }}" >Lunch/Dinner</a>
     </li>
+    {% endwith %}
 </ul>
 </nav>
 <!-- Navbar end -->

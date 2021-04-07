@@ -10,7 +10,11 @@ from .models import User,Category, Recipe
 
 
 def index(request):
-    return render(request, 'recipes/index.html')
+    print("123213213213213")
+    latest = Recipe.objects.all().order_by('Created')
+    print(latest)
+    print("123213213213213")
+    return render(request, 'recipes/index.html',{'recipes':latest})
 
 
 def category(request, cat):
@@ -26,11 +30,19 @@ def category(request, cat):
         print("***********")
         print(recipes)
         print("***********")
+    else:
+        recipes = Recipe.objects.none()
 
     print("*****----******")
     print("*****----******")
 
     return render(request, 'recipes/category.html', {'category': cat.title(),'recipes':recipes})
+
+def view_recipe(request,name):
+    recipe_obj = Recipe.objects.get(pk=5)
+
+    return render(request,'recipes/view_recipe.html',{'recipe':recipe_obj})
+
 
 
 def login_view(request):
@@ -53,7 +65,6 @@ def login_view(request):
         if request.user.is_authenticated:
             return HttpResponseRedirect(reverse("index"))
         return render(request, "recipes/login.html")
-
 
 def logout_view(request):
     logout(request)
