@@ -32,6 +32,8 @@ def category(request, cat):
         print("***********")
         print(cat_obj)
         print("***********")
+        if cat_obj.Name == 'lunch':
+            cat_obj.Name = "Lunch/Dinner"
     else:
         recipes = Recipe.objects.none()
         cat_obj = Category.objects.none()
@@ -83,6 +85,8 @@ def add_recipe(request):
     print(cats)
 
     return render(request,'recipes/add_recipe.html',{'cats':cats})
+
+
 
 def login_view(request):
     if request.method == "POST":

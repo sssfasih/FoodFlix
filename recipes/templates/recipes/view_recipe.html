@@ -37,7 +37,7 @@
 </section>
     <!-- Slider end -->
     <h1 class="text-center">{{ recipe.Name|title }}</h1>
-    <p>Tags: {% for cat in recipe.Tags.all %}#{{ cat.Name }},{% endfor %}</p>
+    <p>Tags: {% for cat in recipe.Tags.all %}#{{ cat.Name }}{% if forloop.last %}.{% else %}, {% endif %}{% endfor %}</p>
 </div>
     <section class="container">
     <h2>Ingredients</h2>
@@ -45,6 +45,8 @@
     <br>
         <h2>Directions</h2>
     <div>{{ method|safe }}</div>
+
+        <p>Contributed by: {{ recipe.Posted_by }}</p>
 
 </section>
 </div>
