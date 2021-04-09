@@ -1,3 +1,10 @@
+body{
+    background-color: #F5E9E2;
+}
+body .card {
+    background-color: #F5E9E2;
+}
+
 header {
     background-color: #141301;
 }
@@ -55,6 +62,15 @@ img[alt='refreshing drinks']{
 
 }
 
-#recipe_carousel > div.active img {
+#recipe_carousel > .carousel-inner > div img {
 height: 300px;
+}
+
+#recipe_decor {
+    width: 90%;
+    margin: 0 auto;
+
+}
+#recipe_decor h2 {
+    color: #FF711F;
 }

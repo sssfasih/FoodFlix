@@ -3,20 +3,23 @@
 {% block main %}
 
 
-    <container id="recipes">
+    <section id="recipes" class="container">
 
-        <div class="container">
-        <img src="{% static 'recipes/imgs/drinks.jpg' %}" alt="refreshing drinks" class="img-fluid">
-    <h1 class="text-center my-2">{{ category }}</h1>
+
+        <img src="{{ category.photo.url }}" alt="refreshing drinks" class="img-fluid">
+    <h1 class="text-center my-2">{{ category.Name|title }}</h1>
     <div class="row">
         {% for eachRecipe in recipes %}
         <div class="col-sm-12 col-md-6 col-lg-3 my-xs-4 my-lg-1">
+        <a href="{% url 'view_recipe' eachRecipe.Name|slugify %}">
         <div class="card">
   <img src="https://www.foodfusion.com/wp-content/uploads/2019/10/Texas-Sheet-cake-Recipe-by-Food-fusion-2.jpg" class="card-img-top" alt="...">
   <div class="card-body">
-    <h2 class="card-text text-center">{{ eachRecipe.Name}}</h2>
+    <h2 class="card-text text-center">{{ eachRecipe.Name|title}}</h2>
   </div>
-</div></div>
+</div>
+        </a>
+        </div>
             {% if forloop.counter|divisibleby:4  %}
         </div><div class="row">
 
@@ -25,7 +28,5 @@
         {% endfor %}
     </div>
 
-
-    </div>
-    </container>
+    </section>
 {% endblock %}
