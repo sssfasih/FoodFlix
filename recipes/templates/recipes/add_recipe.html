@@ -7,19 +7,20 @@
 {% block main %}
     <h1 class="text-center" id="heading">Add Recipe</h1>
     <div class="container mr-5 pr-5">
-        <form action="{% url 'add_recipe' %}" method="POST" id="form">
+        <form action="{% url 'add_recipe' %}" method="POST" id="form" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="name" class="form-label">Recipe Name</label>
                 <input type="text" class="form-control" id="name" placeholder="" name="name">
             </div>
             {% for eachCat in cats %}
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="True" id="{{ eachCat }}" name="{{ eachCat }}">
-                <label class="form-check-label" for="{{ eachCat }}">
-                    {{ eachCat.title }}
-                </label>
-            </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="True" id="{{ eachCat }}"
+                           name="{{ eachCat }}">
+                    <label class="form-check-label" for="{{ eachCat }}">
+                        {{ eachCat.title }}
+                    </label>
+                </div>
             {% endfor %}
 
             <div class="mb-3">
@@ -29,6 +30,10 @@
             <div class="mb-3">
                 <label for="method" class="form-label">Method</label>
                 <textarea class="form-control" id="method" rows="5" name="method"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="upload_images" class="form-label">Recipe Images</label>
+                <input class="form-control" type="file" accept="image/*" id="upload_images" name="uploaded_images" multiple>
             </div>
             <div class="col-12">
                 <button type="submit" class="btn btn-secondary" id="button">Submit Recipe</button>

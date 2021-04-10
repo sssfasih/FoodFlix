@@ -1,0 +1,36 @@
+{% extends 'recipes/layout.html' %}
+{% load static %}
+{% block main %}
+
+
+    <section id="recipes" class="container">
+
+
+           <!-- header start -->
+    <div class="container">
+        <div class="text-center">
+            <h1>{{ userx.first_name }}</h1>
+            <h6>({{ userx.username }})</h6>
+            {% if user.is_authenticated %}
+                {% if user == userx %}
+
+                {% elif user.username in followers %}
+                    <a href="#"><button class="btn btn-primary" style="border-radius: 800px"> Unfollow</button></a>
+                {% else %}
+
+                <a href="#"><button class="btn btn-primary" style="border-radius: 800px"> Follow</button></a>
+                {% endif %}
+            {% endif %}
+
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col">Following: 4</div>
+            <div class="col">Followers: 5</div>
+        </div>
+    </div>
+
+    </section>
+{% endblock %}

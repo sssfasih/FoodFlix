@@ -3,7 +3,7 @@ from django.db import IntegrityError
 from django.shortcuts import render, reverse
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse,HttpResponseBadRequest,HttpResponseNotAllowed
 from django.contrib.auth.decorators import login_required
-from .models import User,Category, Recipe
+from .models import User,Category, Recipe,RecipeImage
 from markdown2 import markdown
 
 
@@ -56,8 +56,10 @@ def view_recipe(request,name):
     recipe_obj = Recipe.objects.get(Name=name)
     ingredients = markdown(recipe_obj.Ingredients)
     method = markdown(recipe_obj.Directions)
+    images = recipe_obj.images.all()
+    print(images)
 
-    return render(request,'recipes/view_recipe.html',{'recipe':recipe_obj,'ingredients':ingredients,'method':method})
+    return render(request,'recipes/view_recipe.html',{'recipe':recipe_obj,'ingredients':ingredients,'method':method,'img_objs':images})
 
 def all_categories(request):
     return HttpResponse('ALL CATEGORIES PAGE')
@@ -69,23 +71,24 @@ def add_recipe(request):
         name = request.POST.get('name').strip().lower()
         ingredients = request.POST.get('ingredients').strip().lower()
         method = request.POST.get('method').strip().lower()
+        files = request.FILES.getlist('uploaded_images')
         if name=="" or ingredients == "" or method == "":
             print("BLANK DATA")
+
         else:
             new_rec = Recipe(Name=name,Ingredients=ingredients,Directions=method,Posted_by=request.user)
             new_rec.save()
+            for loop in files:
+                img = RecipeImage(recipe=new_rec, image=loop)
+                img.save()
             for loop in cats:
                 if request.POST.get(loop) == "True":
                     cat_obj = Category.objects.get(Name=loop)
-                    print("^^^^^^^^^")
-                    print(cat_obj)
-                    print("^^^^^^^^^")
                     new_rec.Tags.add(cat_obj)
 
-    print(cats)
+
 
     return render(request,'recipes/add_recipe.html',{'cats':cats})
-
 
 
 def login_view(request):
