@@ -21,6 +21,9 @@ class Recipe(models.Model):
     Posted_by = models.ForeignKey(User,on_delete=models.CASCADE,related_name='poster',default='')
     Created = models.DateTimeField(auto_now=True)
     Tags = models.ManyToManyField(Category, related_name='recipes', blank=True)
+    Likers = models.ManyToManyField(User, related_name='Favourites')
+
+    Slug = models.SlugField()
 
     def __str__(self):
         return f"Recipe:{self.Name}"

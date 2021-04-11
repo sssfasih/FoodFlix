@@ -38,12 +38,27 @@ div.accounts {
 /* Forms */
 input:focus,
 textarea:focus,
-select:focus{
+select:focus,
+input:active,
+textarea:active,
+select:active{
 
-    color: red !important;
 
+border-color: #FF711F !important;
+outline: 0 !important;
+-webkit-box-shadow: inset 0 1px 1px #FF711F,0 0 8px #FF711F !important;
+box-shadow: inset 0 1px 1px #FF711F,0 0 8px #FF711F !important;
 }
 
+.btn-primary {
+    background-color: #FF711F;
+    border-color: #FF711F !important;
+    outline: 0 !important;
+}
+.btn-primary:hover{
+    background-color: #FF711F;
+    color: #141301;
+}
 
 form > img.login{
     height: 100px !important;
@@ -73,4 +88,18 @@ height: 300px;
 }
 #recipe_decor h2 {
     color: #FF711F;
+}
+.recipes .row a {
+    text-decoration: none;
+
+}
+.recipes .card h2 {
+
+    font-family: 'gregular',Serif;
+
+    color: #141301;
+
+}
+.recipes .card {
+    height: 100%;
 }

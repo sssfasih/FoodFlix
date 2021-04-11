@@ -58,19 +58,44 @@
     <li class="nav-item {% if request.path == drinks_url %}active{% endif %}">
         <a class="nav-link" href="{{ drinks_url }}">Drinks</a>
     </li>
+        {% url 'category' 'pizzas' as pizzas_url %}
+        {% url 'category' 'cakes' as cakes_url %}
+        {% url 'category' 'parathas' as parathas_url %}
+        {% url 'category' 'kababs' as kababs_url %}
+        {% url 'category' 'burgers and sandwiches' as bandg_url %}
+        {% url 'category' 'salads' as salads_url %}
+        {% url 'category' 'breads' as breads_url %}
+        {% url 'category' 'kids menu' as kids_url %}
+        {% url 'category' 'desserts' as desserts_url %}
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-           aria-expanded="false">
-            Dish Type
-        </a>
-        <ul class="dropdown-menu"  aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li>
-                <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
+							<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="true"> Dish Type</a>
+							<div class="dropdown-menu dropdown-large" data-bs-popper="none">
+								<div class="container-fluid">
+                                    <div class="row mx-3">
+                                        <div class="col-6 px-2">
+
+                                            <ul class="list-unstyled">
+                                                <li class="nav-item"><a href="{{pizzas_url}}">Pizzas</a></li>
+                                                <li class="nav-item"><a href="{{parathas_url}}">Parathas</a></li>
+                                                <li class="nav-item"><a href="{{kababs_url}}">Kababs</a></li>
+                                                <li class="nav-item"><a href="{{bandg_url}}">Burgers and Sandwiches</a></li>
+
+
+                                            </ul>
+                                        </div>
+                                        <!-- end col-3 -->
+                                        <div class="col-6 px-2">
+                                            <ul class="list-unstyled">
+                                                <li class="nav-item"><a href="{{cakes_url}}">Cakes</a></li>
+                                                <li class="nav-item"><a href="{{salads_url}}">Salads</a></li>
+                                                <li class="nav-item"><a href="{{breads_url}}">Breads</a></li>
+                                                <li class="nav-item"><a href="{{kids_url}}">Kids Menu</a></li>
+                                                <li class="nav-item"><a href="{{desserts_url}}">Desserts</a></li>
+                                            </ul>
+                                        </div><!-- end col-3 -->
+                                    </div>
+                                </div><!-- end row -->
+                            </div> <!-- dropdown-large.// -->
     </li>
         {% url 'category' 'breakfast' as breakfast_url %}
     <li class="nav-item {% if request.path == breakfast_url %}active{% endif %}">

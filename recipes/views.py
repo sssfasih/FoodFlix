@@ -5,22 +5,19 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse,HttpRes
 from django.contrib.auth.decorators import login_required
 from .models import User,Category, Recipe,RecipeImage
 from markdown2 import markdown
-
+from django.utils.text import slugify
 
 # Create your views here.
 
 
 def index(request):
-    print("123213213213213")
+
     latest = Recipe.objects.all().order_by('Created')
-    print(latest)
-    print("123213213213213")
+
     return render(request, 'recipes/index.html',{'recipes':latest})
 
 
 def category(request, cat):
-    print("*****----******")
-    print("*****----******")
 
     cats = []
     for eachCat in Category.objects.all():
@@ -38,8 +35,6 @@ def category(request, cat):
         recipes = Recipe.objects.none()
         cat_obj = Category.objects.none()
 
-    print("*****----******")
-    print("*****----******")
 
     return render(request, 'recipes/category.html', {'category': cat_obj,'recipes':recipes})
 
@@ -69,6 +64,7 @@ def add_recipe(request):
     if request.method == 'POST':
 
         name = request.POST.get('name').strip().lower()
+        slug = slugify(name)
         ingredients = request.POST.get('ingredients').strip().lower()
         method = request.POST.get('method').strip().lower()
         files = request.FILES.getlist('uploaded_images')
@@ -76,7 +72,7 @@ def add_recipe(request):
             print("BLANK DATA")
 
         else:
-            new_rec = Recipe(Name=name,Ingredients=ingredients,Directions=method,Posted_by=request.user)
+            new_rec = Recipe(Name=name,Ingredients=ingredients,Directions=method,Posted_by=request.user,Slug=slug)
             new_rec.save()
             for loop in files:
                 img = RecipeImage(recipe=new_rec, image=loop)
@@ -89,6 +85,23 @@ def add_recipe(request):
 
 
     return render(request,'recipes/add_recipe.html',{'cats':cats})
+
+@login_required
+def view_profile(request, id):
+    requested_user = User.objects.get(pk=id)
+    if requested_user != request.user:
+        HttpResponseRedirect(reverse('index'))
+    # print(request.user,' != ',followers)
+    #r = request.GET.get('page')
+
+    #p = Paginator(posts, 10)
+
+    #if r:
+    #    page_posts = p.page(r)
+    #else:
+    #    page_posts = p.page(1)
+
+    return render(request, 'recipes/view_profile.html')
 
 
 def login_view(request):
