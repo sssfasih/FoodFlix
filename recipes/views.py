@@ -92,7 +92,7 @@ def add_recipe(request):
 def view_profile(request):
     id = request.user.id
 
-    requested_user = User.objects.get()
+    requested_user = User.objects.get(pk=id)
 
     fav_recipes = requested_user.Favourites.all()
 
