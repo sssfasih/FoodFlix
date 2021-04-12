@@ -57,8 +57,10 @@ def view_recipe(request,name):
     return render(request,'recipes/view_recipe.html',{'recipe':recipe_obj,'ingredients':ingredients,'method':method,'img_objs':images})
 
 def all_categories(request):
-    return HttpResponse('ALL CATEGORIES PAGE')
+    all_cats = Category.objects.all()
+    return render(request,'recipes/all_cats.html',{'all_cats':all_cats})
 
+@login_required
 def add_recipe(request):
     cats = (cat.Name for cat in Category.objects.all())
     if request.method == 'POST':
@@ -87,11 +89,13 @@ def add_recipe(request):
     return render(request,'recipes/add_recipe.html',{'cats':cats})
 
 @login_required
-def view_profile(request, id):
-    requested_user = User.objects.get(pk=id)
-    if requested_user != request.user:
-        HttpResponseRedirect(reverse('index'))
-    # print(request.user,' != ',followers)
+def view_profile(request):
+    id = request.user.id
+
+    requested_user = User.objects.get()
+
+    fav_recipes = requested_user.Favourites.all()
+
     #r = request.GET.get('page')
 
     #p = Paginator(posts, 10)
@@ -101,9 +105,22 @@ def view_profile(request, id):
     #else:
     #    page_posts = p.page(1)
 
-    return render(request, 'recipes/view_profile.html')
+    return render(request, 'recipes/view_profile.html',{'recipes':fav_recipes})
 
+def recipe_addfav(request,id):
+    recipe = Recipe.objects.get(pk=id)
+    request.user.Favourites.add(recipe)
+    return HttpResponseRedirect(reverse(f'view_recipe',args=[recipe.Name]))
 
+def recipe_remfav(request,id):
+    recipe = Recipe.objects.get(pk=id)
+    if recipe in request.user.Favourites.all():
+        request.user.Favourites.remove(recipe)
+        #print("Removed")
+    else:
+        #print("recipe not in favs")
+        pass
+    return HttpResponseRedirect(reverse(f'view_recipe',args=[recipe.Name]))
 def login_view(request):
     if request.method == "POST":
 

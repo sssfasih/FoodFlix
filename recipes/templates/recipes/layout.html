@@ -31,7 +31,7 @@
                 </form> -->
                 {% if user.is_authenticated %}
                     <div class="d-flex accounts">
-                    <a href="#" class="nav-link">{{ user.username }}</a>
+                    <a href="{% url 'view_profile' %}" class="nav-link">{{ user.username }}</a>
                     <a href="{% url 'logout' %}" class="nav-link">Logout</a>
                     </div>
 
@@ -69,7 +69,7 @@
         {% url 'category' 'desserts' as desserts_url %}
     <li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="true"> Dish Type</a>
-							<div class="dropdown-menu dropdown-large" data-bs-popper="none">
+							<div class="dropdown-menu dropdown-large py-2" data-bs-popper="none">
 								<div class="container-fluid">
                                     <div class="row mx-3">
                                         <div class="col-6 px-2">
@@ -95,6 +95,7 @@
                                         </div><!-- end col-3 -->
                                     </div>
                                 </div><!-- end row -->
+                                <p class="nav-item pt-2"><a href="{% url 'all_categories' %}">View All Categories</a></p>
                             </div> <!-- dropdown-large.// -->
     </li>
         {% url 'category' 'breakfast' as breakfast_url %}

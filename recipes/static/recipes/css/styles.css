@@ -16,6 +16,11 @@ nav a:hover {
     color: #FF711F;
 }
 
+.dropdown-large{
+    background-color: #F5E9E2;
+}
+
+
 /* Highlighted nagivational links */
 
 nav .active {
@@ -35,6 +40,9 @@ div.accounts {
 .active > a:hover, .accounts > a:hover {
     color: #141301;
 }
+
+
+
 /* Forms */
 input:focus,
 textarea:focus,
@@ -71,7 +79,7 @@ form > img.signup{
     color: #FF711F;
 }
 
-img[alt='refreshing drinks']{
+img.cat-pic{
     height: 20rem;
     width: 100%;
 
@@ -103,3 +111,26 @@ height: 300px;
 .recipes .card {
     height: 100%;
 }
+
+.btn[name='add_fav']{
+    border-color: #FF711F;
+    color: #141301;"
+}
+
+.btn[name='fav'] {
+    border-color: #FF711F;
+    color: #F5E9E2;
+    background-color: #E05200;
+}
+
+.all-cats a {
+    text-decoration: none;
+}
+
+.all-cats .card-title {
+    margin: 50% 0;
+    text-align: center;
+    font-size: 200%;
+    font-family: 'gregular',Serif;
+}
+

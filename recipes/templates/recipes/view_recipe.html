@@ -51,9 +51,18 @@
             </section>
             <!-- Slider end -->
             <h1 class="text-center">{{ recipe.Name|title }}</h1>
-            <p>Tags: {% for cat in recipe.Tags.all %}#
-                {{ cat.Name }}{% if forloop.last %}.{% else %}, {% endif %}{% endfor %}</p>
-            <!-- <button class="btn" style="border-color: #FF711F; color: #141301;">Add to Favourites</button> -->
+            <p>Tags: {% for cat in recipe.Tags.all %}#{{ cat.Name }}{% if forloop.last %}.{% else %}, {% endif %}{% endfor %}</p>
+
+            {% if recipe in user.Favourites.all %}
+                <form action="{% url 'recipe_remfav' recipe.id %}">
+                    <button class="btn" name='fav'>Favourite</button>
+                </form>
+            {% else %}
+                <form action="{% url 'recipe_addfav' recipe.id %}">
+                    <button class="btn" name="add_fav">Add to Favourites</button>
+                </form>
+            {% endif %}
+
         </div>
         <section class="container">
             <h2>Ingredients</h2>
