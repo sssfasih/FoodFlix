@@ -10,6 +10,8 @@
           integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
 
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
     <link rel="stylesheet" href="{% static 'recipes/css/styles.css' %}">
     {% block styles %}{% endblock %}
 
@@ -114,7 +116,11 @@
     {% block main %}
     {% endblock %}
 </main>
-<footer></footer>
+<footer>
+    <div class="footer">
+             <p class="text-center"><i class="far fa-copyright"></i> 2021 - Developed by <a href="https://www.linkedin.com/in/sssfasih/">sssfasih</a></p>
+         </div>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
         integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
@@ -124,4 +130,5 @@
         crossorigin="anonymous"></script>
 
 </body>
+
 </html>

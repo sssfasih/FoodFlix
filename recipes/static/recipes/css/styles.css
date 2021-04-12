@@ -57,6 +57,26 @@ outline: 0 !important;
 -webkit-box-shadow: inset 0 1px 1px #FF711F,0 0 8px #FF711F !important;
 box-shadow: inset 0 1px 1px #FF711F,0 0 8px #FF711F !important;
 }
+/* Main & Footer */
+main{
+    min-height: 80vh;
+}
+footer {
+    background-color: #141301;
+    color: #F5E9E2;
+    position: relative;
+    bottom: -20px;
+}
+footer a {
+    text-decoration: none;
+    color: #F5E9E2;
+}
+footer a:hover {
+    color: #E05200;
+}
+
+
+
 
 .btn-primary {
     background-color: #FF711F;
