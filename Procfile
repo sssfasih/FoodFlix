@@ -1,0 +1,1 @@
+web: gunicorn FoodFlix.wsgi --log-file -
