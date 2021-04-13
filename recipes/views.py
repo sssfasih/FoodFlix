@@ -24,11 +24,10 @@ def category(request, cat):
         cats.append(eachCat.Name.lower())
 
     if cat.lower() in cats:
-        recipes = Recipe.objects.filter(Tags__Name__contains=cat.title())
+
         cat_obj = Category.objects.get(Name__contains=cat.lower())
-        print("***********")
-        print(cat_obj)
-        print("***********")
+        recipes = cat_obj.recipes.all()
+
         if cat_obj.Name == 'lunch':
             cat_obj.Name = "Lunch/Dinner"
     else:
@@ -43,6 +42,7 @@ def view_recipe(request,name):
     check = name.replace(' ','')
     if check.isalnum():
         print("alphabet")
+        pass
     else:return HttpResponseRedirect(reverse('all_category'))
 
     print("78787878787")
