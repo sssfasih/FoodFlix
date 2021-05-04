@@ -13,9 +13,7 @@ from django.utils.text import slugify
 def index(request):
 
     latest = Recipe.objects.all().order_by('Created')
-
     return render(request, 'recipes/index.html',{'recipes':latest})
-
 
 def category(request, cat):
 
@@ -38,17 +36,17 @@ def category(request, cat):
     return render(request, 'recipes/category.html', {'category': cat_obj,'recipes':recipes})
 
 def view_recipe(request,name):
-    name = name.replace("-",' ').strip().lower()
-    check = name.replace(' ','')
-    if check.isalnum():
-        print("alphabet")
-        pass
-    else:return HttpResponseRedirect(reverse('all_category'))
-
-    print("78787878787")
-    print(name)
-    print("78787878787")
-    recipe_obj = Recipe.objects.get(Name=name)
+    slug = name
+    #name = name.replace("-",' ').strip().lower()
+    #check = name.replace(' ','')
+    #if check.isalnum():
+        #print("alphabet")
+    #    pass
+    #else:return HttpResponseRedirect(reverse('all_category'))
+    print("SLUGGGGGG")
+    print(slug)
+    print("SLUGGGGGG")
+    recipe_obj = Recipe.objects.get(Slug=slug)
     ingredients = markdown(recipe_obj.Ingredients)
     method = markdown(recipe_obj.Directions)
     images = recipe_obj.images.all()
@@ -65,10 +63,10 @@ def add_recipe(request):
     cats = (cat.Name for cat in Category.objects.all())
     if request.method == 'POST':
 
-        name = request.POST.get('name').strip().lower()
+        name = request.POST.get('name').strip()
         slug = slugify(name)
-        ingredients = request.POST.get('ingredients').strip().lower()
-        method = request.POST.get('method').strip().lower()
+        ingredients = request.POST.get('ingredients').strip()
+        method = request.POST.get('method').strip()
         files = request.FILES.getlist('uploaded_images')
         if name=="" or ingredients == "" or method == "":
             print("BLANK DATA")
@@ -83,6 +81,7 @@ def add_recipe(request):
                 if request.POST.get(loop) == "True":
                     cat_obj = Category.objects.get(Name=loop)
                     new_rec.Tags.add(cat_obj)
+            return HttpResponseRedirect(reverse('view_recipe',args=[slug]))
 
 
 
@@ -110,7 +109,7 @@ def view_profile(request):
 def recipe_addfav(request,id):
     recipe = Recipe.objects.get(pk=id)
     request.user.Favourites.add(recipe)
-    return HttpResponseRedirect(reverse(f'view_recipe',args=[recipe.Name]))
+    return HttpResponseRedirect(reverse('view_recipe',args=[recipe.Slug]))
 
 def recipe_remfav(request,id):
     recipe = Recipe.objects.get(pk=id)
@@ -120,7 +119,45 @@ def recipe_remfav(request,id):
     else:
         #print("recipe not in favs")
         pass
-    return HttpResponseRedirect(reverse(f'view_recipe',args=[recipe.Name]))
+    return HttpResponseRedirect(reverse('view_recipe',args=[recipe.Slug]))
+
+def recipe_edit(request,id):
+    recipe = Recipe.objects.get(pk=id)
+    cats = (cat.Name for cat in Category.objects.all())
+    if request.method == "POST":
+        name = request.POST.get('name').strip()
+        ingredients = request.POST.get('ingredients').strip()
+        method = request.POST.get('method').strip()
+        files = request.FILES.getlist('uploaded_images')
+        if name == "" or ingredients == "" or method == "":
+            print("BLANK DATA")
+
+        else:
+            recipe.Name = name
+            recipe.Ingredients = ingredients
+            recipe.Directions = method
+
+            for loop in cats:
+                cat_obj = Category.objects.get(Name=loop)
+                if request.POST.get(loop) == "True":
+                    if cat_obj not in recipe.Tags.all(): recipe.Tags.add(cat_obj)
+                else:
+                    if cat_obj in recipe.Tags.all():recipe.Tags.remove(cat_obj)
+
+            recipe.save()
+            """
+            for loop in files:
+                img = RecipeImage(recipe=new_rec, image=loop)
+                img.save()
+            
+            """
+            return HttpResponseRedirect(reverse('view_recipe', args=[recipe.Slug]))
+    else:
+
+        cats = (cat.Name for cat in Category.objects.all())
+        recipe_cats = recipe.Tags.values_list('Name',flat=True)
+        return render(request,'recipes/add_recipe.html',{'editMode':True,'cats':cats,'recipe_obj':recipe,'recipe_cats':recipe_cats})
+
 def login_view(request):
     if request.method == "POST":
 

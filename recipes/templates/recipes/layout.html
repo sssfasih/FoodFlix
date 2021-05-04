@@ -49,7 +49,7 @@
     </div>
 
 </header>
-<nav>
+<nav class="row">
 <ul class="nav nav-pills nav-fill">
     {% with url_name=request.resolver_match.url_name %}
     <li class="nav-item {% if url_name == 'index' %}active{% endif %}">

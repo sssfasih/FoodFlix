@@ -13,7 +13,18 @@
                 <label for="name" class="form-label">Recipe Name</label>
                 <input type="text" class="form-control" id="name" placeholder="" name="name">
             </div>
+
             {% for eachCat in cats %}
+
+                {% if editMode and eachCat in recipe_cats %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="True" id="{{ eachCat }}"
+                               name="{{ eachCat }}" checked>
+                        <label class="form-check-label" for="{{ eachCat }}">
+                            {{ eachCat.title }}
+                        </label>
+                    </div>
+                {% else %}
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="True" id="{{ eachCat }}"
                            name="{{ eachCat }}">
@@ -21,6 +32,7 @@
                         {{ eachCat.title }}
                     </label>
                 </div>
+                {% endif %}
             {% endfor %}
 
             <div class="mb-3">
@@ -33,28 +45,30 @@
             </div>
             <div class="mb-3">
                 <label for="upload_images" class="form-label">Recipe Images</label>
-                <input class="form-control" type="file" accept="image/*" id="upload_images" name="uploaded_images" multiple>
+                <input class="form-control" type="file" accept="image/*" id="upload_images" name="uploaded_images"
+                       multiple>
             </div>
             <div class="col-12">
                 <button type="submit" class="btn btn-secondary" id="button">Submit Recipe</button>
             </div>
         </form>
     </div>
+    {% if editMode %}
+        <script>
+            console.log("Runner")
 
-    <script>
-        var editMode = '{{editMode}}'
-        if (editMode == "True") {
-            var content = `{{ content|safe }}`
-            console.log(content);
-            document.getElementById('form').action = "#";
-            document.getElementById('heading').innerText = "Edit an Entry";
-            document.getElementById('title').disabled = true;
-            document.getElementById('title').value = '{{title}}';
-            document.getElementById('content').value = content;
-            document.getElementById('button').innerText = 'Edit';
+            window.onload = function () {
+                console.log("Running");
 
-        }
+                document.getElementById('form').action = "{% url 'recipe_edit' recipe_obj.id %}";
+                document.getElementById('heading').innerText = "Edit Recipe";
+                document.getElementById('name').value = "{{ recipe_obj.Name }}";
+                document.getElementById('ingredients').value = `{{ recipe_obj.Ingredients|safe }}`;
+                document.getElementById('method').value = `{{ recipe_obj.Directions|safe }}`;
 
-    </script>
+                document.getElementById('button').innerText = 'Edit Recipe';
+            }
 
+        </script>
+    {% endif %}
 {% endblock %}

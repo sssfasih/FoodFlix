@@ -55,14 +55,18 @@
             {% if user.is_authenticated %}
 
             {% if recipe in user.Favourites.all %}
-                <form action="{% url 'recipe_remfav' recipe.id %}">
-                    <button class="btn" name='fav'>Favourite</button>
-                </form>
+
+                    <a href="{% url 'recipe_remfav' recipe.id %}" class="btn" name='fav'>Favourite</a>
+
             {% else %}
-                <form action="{% url 'recipe_addfav' recipe.id %}">
-                    <button class="btn" name="add_fav">Add to Favourites</button>
-                </form>
+
+                    <a href="{% url 'recipe_addfav' recipe.id %}" class="btn" name="add_fav">Add to Favourites</a>
+
             {% endif %}
+
+                {% if user == recipe.Posted_by %}
+                    <a href="{% url 'recipe_edit' recipe.id %}" class="btn" name="edit">Edit</a>
+                    {% endif %}
             {% endif %}
         </div>
         <section class="container">

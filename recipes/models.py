@@ -22,7 +22,6 @@ class Recipe(models.Model):
     Created = models.DateTimeField(auto_now=True)
     Tags = models.ManyToManyField(Category, related_name='recipes', blank=True)
     Likers = models.ManyToManyField(User, related_name='Favourites')
-
     Slug = models.SlugField()
 
     def __str__(self):
