@@ -43,14 +43,14 @@ def view_recipe(request,name):
         #print("alphabet")
     #    pass
     #else:return HttpResponseRedirect(reverse('all_category'))
-    print("SLUGGGGGG")
-    print(slug)
-    print("SLUGGGGGG")
+    #print("SLUGGGGGG")
+    #print(slug)
+    #print("SLUGGGGGG")
     recipe_obj = Recipe.objects.get(Slug=slug)
     ingredients = markdown(recipe_obj.Ingredients)
     method = markdown(recipe_obj.Directions)
     images = recipe_obj.images.all()
-    print(images)
+    #print(images)
 
     return render(request,'recipes/view_recipe.html',{'recipe':recipe_obj,'ingredients':ingredients,'method':method,'img_objs':images})
 
